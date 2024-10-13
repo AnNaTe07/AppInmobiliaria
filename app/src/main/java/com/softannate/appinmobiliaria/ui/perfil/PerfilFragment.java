@@ -3,6 +3,8 @@ package com.softannate.appinmobiliaria.ui.perfil;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -56,7 +58,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
                 if (btPerfil.getText().toString().equals("Editar")) {
                     //cambio editText a "editable"
-                    for (int i = 0; i < layout.getChildCount(); i++) {//getChildCount() n° hijos
+                    for (int i = 0; i < layout.getChildCount(); i++) {// n° hijos
                         View child = layout.getChildAt(i);
                         if (child instanceof EditText) {
                             child.setFocusable(true);
@@ -74,6 +76,31 @@ public class PerfilFragment extends Fragment {
                     }
                     btPerfil.setText("Editar");
                 }
+            }
+        });
+
+        bindingPerfil.btFotoPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //creo cuadro de dialogo
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Seleccione una opción")
+                        .setItems(new CharSequence[]{"Tomar foto", "Elegir de la galería","Eliminar foto"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0:
+                                        //tomarFoto();
+                                        break;
+                                    case 1:
+                                        //seleccionarFoto();
+                                        break;
+                                    case 2:
+                                        //eliminarFoto();
+                                        break;
+                                }
+                            }
+                        }).setNegativeButton("Cancelar", null).show();               ;
             }
         });
 

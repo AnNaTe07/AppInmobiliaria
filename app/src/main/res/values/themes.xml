@@ -21,6 +21,8 @@
     <style name="Theme.AppInmobiliaria.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Cambia el color del CheckBox -->
+        <item name="colorControlActivated">#040D47</item>
     </style>
     <!--cambio la fuente del menu, aplico en activity_main:  app:itemTextAppearance="@style/NavItemText"-->
     <style name="NavItemText" parent="TextAppearance.AppCompat">
@@ -30,4 +32,5 @@
     <style name="Theme.AppInmobiliaria.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AppInmobiliaria.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

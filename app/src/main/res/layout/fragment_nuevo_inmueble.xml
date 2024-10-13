@@ -7,31 +7,62 @@
     android:layout_height="match_parent"
     tools:context=".ui.inmuebles.NuevoInmuebleFragment">
 
-<ImageView
-android:id="@+id/imageView3"
-android:layout_width="176dp"
-android:layout_height="172dp"
-android:src="@drawable/logo_inmo"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="1.0"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-tools:layout_editor_absoluteY="172dp" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="152dp"
+        android:layout_height="159dp"
+        android:src="@drawable/logo_inmo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<ImageView
-android:id="@+id/ivInm"
-android:layout_width="212dp"
-android:layout_height="170dp"
-android:autofillHints="agregar foto"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.05"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintVertical_bias="0.057"
-tools:src="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
+        android:text="Inmobiliaria AnNaTe"
+        android:textAlignment="center"
+        android:textColor="#040D47"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878" />
 
-<EditText
+    <Button
+        android:id="@+id/btFotoInmuebleNuevo"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="172dp"
+        android:backgroundTint="#040D47"
+        app:icon="@drawable/camara"
+        app:iconSize="30dp"
+        app:iconTint="#FFFCFC"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagenInmuebleNuevo"
+        android:layout_width="212dp"
+        android:layout_height="170dp"
+        android:autofillHints="agregar foto"
+        android:src="@drawable/casa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        tools:src="@tools:sample/avatars" />
+
+    <EditText
 android:id="@+id/etTipoI"
 android:layout_width="185dp"
 android:layout_height="45dp"
