@@ -45,6 +45,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        binding.btIngresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vm.llamarLogin(binding.etEmail.getText().toString(), binding.etPass.getText().toString());
+
+            }
+        });
+
         //para agregar a el texto el subrayado
         binding.tvOlvidePass.setPaintFlags(binding.tvOlvidePass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         //binding.etPass.setPaintFlags(binding.etPass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);

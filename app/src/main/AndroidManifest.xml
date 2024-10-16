@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo_inmo"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppInmobiliaria"
@@ -49,6 +51,7 @@
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppInmobiliaria.NoActionBar">
+
 
         </activity>
     </application>
