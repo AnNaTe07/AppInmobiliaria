@@ -25,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PerfilViewModel extends AndroidViewModel {
+
     private Context contexto;
     private MutableLiveData<Propietario> mPropietario;
     private MutableLiveData<Boolean> editar = new MutableLiveData<>(false);
@@ -59,9 +60,10 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void leerPropietario() {
-        SharedPreferences sp = contexto.getSharedPreferences("token.xml", 0);
-        String token = sp.getString("token", "");
-        ApiClient.InmobiliariaService api = ApiClient.getApi();
+        //SharedPreferences sp = contexto.getSharedPreferences("token.xml", 0);
+        //String token = sp.getString("token", "");
+        ApiClient.Endpoints api = ApiClient.getApi();
+        String token = ApiClient.getToken(contexto);
 
         Call<Propietario> llamadaAPerfil = api.profile(token);
         llamadaAPerfil.enqueue(new Callback<Propietario>() {
@@ -81,45 +83,35 @@ public class PerfilViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<Propietario> call, Throwable t) {
                 Toast.makeText(contexto, "Error al mostrar los Datos", Toast.LENGTH_SHORT).show();
-                Log.d("fallo", mPropietario + "");
+                //Log.d("fallo", mPropietario + "");
             }
         });
     }
 
-public void update(Propietario p){
-    SharedPreferences sp = contexto.getSharedPreferences("token.xml", 0);
-    String token = sp.getString("token", "");
+    public void update(Propietario p){
+        ApiClient.Endpoints api = ApiClient.getApi();
+        String token = ApiClient.getToken(contexto);
 
-    ApiClient.InmobiliariaService api = ApiClient.getApi();
-    Log.d("propietarioAActualizar", "Apellido: " + p.getApellido() + ", Nombre: " + p.getNombre());
-
-    Call<Propietario> llamadaAActualizar = api.update(token, p);
-    Log.d("antesdellamada", p + "");
-    Log.d("Datos a actualizar", "Apellido: " + p.getApellido() + ", Nombre: " + p.getNombre() +
+        Call<Propietario> llamadaAActualizar = api.update(token, p);
+        Log.d("Datos a actualizar", "Apellido: " + p.getApellido() + ", Nombre: " + p.getNombre() +
             ", Email: " + p.getEmail() + ", Teléfono: " + p.getTelefono());
 
-
-    llamadaAActualizar.enqueue(new Callback<Propietario>() {
+        llamadaAActualizar.enqueue(new Callback<Propietario>() {
 
         @Override
         public void onResponse(Call<Propietario> call, Response<Propietario> response) {
-            Log.d("entroOnResponse", response.raw() + "");
-
-
-            Log.d("entroASatisfactorio", response.raw() + "");
+           // Log.d("entroOnResponse", response.raw() + "");
 
             if (response.isSuccessful() && response.body() != null) {
-                Log.d("entroResponse.Bdoy", response.raw() + "");
                 mPropietario.postValue(response.body());
-                Log.d("propietarioEditadp", mPropietario + " " + response.message());
-                Log.d("respuesta", response.body() + "");
+               // Log.d("respuesta", response.body() + "");
                 leerPropietario();
             }
         }
         @Override
         public void onFailure(Call<Propietario> call, Throwable t) {
             Toast.makeText(contexto, "Error al actualizar los Datos", Toast.LENGTH_SHORT).show();
-            Log.d("falloactualizar", t.getMessage());
+           // Log.d("fallo update profile", t.getMessage());
         }
     });
 }
@@ -136,7 +128,7 @@ public void update(Propietario p){
         }
     }
 
-        public void cambioEditText (ViewGroup layout){
+    public void cambioEditText (ViewGroup layout){
             boolean editable = editar.getValue() != null && editar.getValue();
             for (int i = 0; i < layout.getChildCount(); i++) {// n° hijos
                 View child = layout.getChildAt(i);
@@ -147,6 +139,7 @@ public void update(Propietario p){
                 }
             }
         }
+
     }
 
 

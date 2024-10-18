@@ -1,16 +1,27 @@
 package com.softannate.appinmobiliaria;
 
+import static android.Manifest.permission.CALL_PHONE;
+
+import static androidx.core.app.ActivityCompat.requestPermissions;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.softannate.appinmobiliaria.databinding.ActivityLoginBinding;
 import com.softannate.appinmobiliaria.modelos.Login;
@@ -24,6 +35,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivityViewModel extends AndroidViewModel {
+
+    private MutableLiveData<Boolean> permisoLlamada = new MutableLiveData<>();
+    private MutableLiveData<Void> hacerLlamada = new MutableLiveData<>();
 
     public LoginActivityViewModel(@NonNull Application application) {
         super(application);
@@ -66,5 +80,36 @@ public class LoginActivityViewModel extends AndroidViewModel {
             }
         });
     }
+
+
+
+    public LiveData<Boolean> getPermisoLlamada() {
+        return permisoLlamada;
+    }
+
+    public LiveData<Void> getHacerLlamada() {
+        return hacerLlamada;
+    }
+
+    public void verificarPermiso(Context context) {
+        boolean tienePermiso = checkSelfPermission(context, Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION) == PackageManager.PERMISSION_GRANTED;
+        permisoLlamada.setValue(tienePermiso);
+    }
+
+    public void intentarLlamar(Context context) {
+        hacerLlamada.setValue(null); // Notificamos un intento de llamada
+        verificarPermiso(context); // Verificamos el permiso
+    }
+
+    public void procesarLlamada(Context context) {
+        if (permisoLlamada.getValue() != null && permisoLlamada.getValue()) {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:2664334839"));
+            context.startActivity(intent);
+        } else {
+            solicitarPermiso(context);
+        }
+    }
+
 
 }

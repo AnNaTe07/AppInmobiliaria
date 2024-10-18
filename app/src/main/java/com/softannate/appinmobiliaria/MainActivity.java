@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         TextView hNombre = headerView.findViewById(R.id.headerNombre);
         TextView hEmail = headerView.findViewById(R.id.headerEmail);
         ImageView hAvatar = headerView.findViewById(R.id.headerAvatar);
+
+        //seteo datos de propietario en header
         vm.getPropietario().observe(this, new Observer<Propietario>() {
             @Override
             public void onChanged(Propietario propietario) {

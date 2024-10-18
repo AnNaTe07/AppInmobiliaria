@@ -48,15 +48,13 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     public void leerPropietario() {
-        SharedPreferences sp = contexto.getSharedPreferences("token.xml", 0);
-        //String token = sp.getString("token", "");
-        String token = sp.getString("token", null);
+        ApiClient.Endpoints api = ApiClient.getApi();
+        String token = ApiClient.getToken(contexto);
         if (token == null || token.isEmpty()) {
             Log.e("MainActivity", "Token no disponible");
-            // Manejar el error adecuadamente, quizás volver a la pantalla de login
             return;
         }
-        ApiClient.InmobiliariaService api = ApiClient.getApi();
+
         Call<Propietario> llamadaAPerfil = api.profile( token);
 
         llamadaAPerfil.enqueue(new Callback<Propietario>() {

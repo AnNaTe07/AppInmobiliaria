@@ -2,7 +2,6 @@ package com.softannate.appinmobiliaria.ui.inmuebles;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,8 +47,7 @@ public class InmueblesViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
 
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d("InmueblesViewModel", "Inmuebles: " + response.body().toString());
+                if (response.isSuccessful()) {
                     inmuebles.postValue((ArrayList<Inmueble>)response.body());
                     Toast.makeText(contexto, "Éstos son sus inmuebles", Toast.LENGTH_SHORT).show();
                 } else {

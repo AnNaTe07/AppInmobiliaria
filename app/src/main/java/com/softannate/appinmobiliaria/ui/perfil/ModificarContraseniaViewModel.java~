@@ -87,7 +87,7 @@ public class ModificarContraseniaViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Toast.makeText(getApplication(), "Error al cambiar el password. Por favor, verifica tu conexión.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Error al cambiar Password", Toast.LENGTH_SHORT).show();
                 //Log.d("fallocambiaPass", throwable.getMessage());
                 mPass.setValue(null); // Indico error
                 redirigirAlLogin.setValue(false);
