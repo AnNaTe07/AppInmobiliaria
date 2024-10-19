@@ -31,8 +31,6 @@ public class PerfilViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> editar = new MutableLiveData<>(false);
     private MutableLiveData<String> button= new MutableLiveData<>("Editar");
 
-    private ApiClient api;
-
     public LiveData<Propietario> getMPropietario() {
         if (mPropietario == null) {
             mPropietario = new MutableLiveData<>();
@@ -60,8 +58,6 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void leerPropietario() {
-        //SharedPreferences sp = contexto.getSharedPreferences("token.xml", 0);
-        //String token = sp.getString("token", "");
         ApiClient.Endpoints api = ApiClient.getApi();
         String token = ApiClient.getToken(contexto);
 

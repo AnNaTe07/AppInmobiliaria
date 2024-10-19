@@ -2,13 +2,13 @@ package com.softannate.appinmobiliaria.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.session.MediaSession;
-import android.support.v4.media.session.MediaSessionCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.softannate.appinmobiliaria.modelos.Contrato;
 import com.softannate.appinmobiliaria.modelos.Inmueble;
+import com.softannate.appinmobiliaria.modelos.InmueblesContratos;
+import com.softannate.appinmobiliaria.modelos.Inquilino;
 import com.softannate.appinmobiliaria.modelos.Login;
 import com.softannate.appinmobiliaria.modelos.Pago;
 import com.softannate.appinmobiliaria.modelos.Pass;
@@ -65,7 +65,7 @@ public class ApiClient {
 
         //Inmueble
         @GET("inmueble")
-        Call<List<Inmueble>> inmuebles(@Header("Authorization") String token);
+        Call<List<InmueblesContratos>> inmuebles(@Header("Authorization") String token);
 
         @PUT("inmueble/estado/{id}")
         Call<Inmueble> estado(@Header("Authorization") String token, @Path("id") int id);
@@ -73,7 +73,10 @@ public class ApiClient {
         //nuevoInmueble
 
         //Contrato
-        //contratos
+
+        @GET("inmueble/alquilados")
+        Call<List<InmueblesContratos>> alquilados(@Header("Authorization") String token);
+
         @GET("inmueble/contrato/{id}")
         Call<Contrato> contrato(@Header("Authorization") String token, @Path("id") int id);
 
@@ -86,6 +89,10 @@ public class ApiClient {
         //FotoInmueble
 
         //OlvidePass
+
+        //Inquilino
+        @GET("inmueble/inquilino/{inmuebleId}")
+        Call<Inquilino> inquilino(@Header("Authorization") String token, @Path("inmuebleId") int id);
     }
 
     public static void guardarToken(String token, Context context){

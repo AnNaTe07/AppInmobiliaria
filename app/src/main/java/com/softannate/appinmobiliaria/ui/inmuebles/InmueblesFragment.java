@@ -3,7 +3,6 @@ package com.softannate.appinmobiliaria.ui.inmuebles;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,24 +20,28 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.softannate.appinmobiliaria.R;
 import com.softannate.appinmobiliaria.databinding.FragmentInmueblesBinding;
-import com.softannate.appinmobiliaria.modelos.Inmueble;
+import com.softannate.appinmobiliaria.modelos.InmueblesContratos;
+import com.softannate.appinmobiliaria.ui.contratos.ContratosFragment;
+import com.softannate.appinmobiliaria.ui.contratos.ContratosViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class InmueblesFragment extends Fragment {
+public class InmueblesFragment extends Fragment implements AdapterInmueble.OnInmuebleClickListener {
 
     private InmueblesViewModel vmInmuebles;
     private RecyclerView rvInmuebles;
     private AdapterInmueble adapter;
     private FragmentInmueblesBinding bindingI;
 
+    public static InmueblesFragment newInstance() {
+        return new InmueblesFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        bindingI = FragmentInmueblesBinding.inflate(inflater, container, false);
+       bindingI = FragmentInmueblesBinding.inflate(inflater, container, false);
         View root = bindingI.getRoot();
 
         bindingI.fab.setOnClickListener(new View.OnClickListener() {
@@ -56,29 +59,35 @@ public class InmueblesFragment extends Fragment {
         return root;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         vmInmuebles = new ViewModelProvider(this).get(InmueblesViewModel.class);
     }
     private void inicializar(View view) {
-
-        rvInmuebles = bindingI.rv;
-
+        rvInmuebles = bindingI.rvInmuebles;
         vmInmuebles = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmueblesViewModel.class);
-        vmInmuebles.getMInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
-            @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
-                AdapterInmueble adapter = new AdapterInmueble(getContext(),inmuebles,getLayoutInflater());
-                GridLayoutManager gl=new GridLayoutManager(requireContext(),1,GridLayoutManager.VERTICAL,false);
+        vmInmuebles.getMInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<InmueblesContratos>>() {
 
-                adapter = new AdapterInmueble(requireContext(), inmuebles, getLayoutInflater());
-                RecyclerView recv= bindingI.rv;
+            @Override
+            public void onChanged(ArrayList<InmueblesContratos> inmueblesContratoes) {
+                GridLayoutManager gl = new GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false);
+                adapter = new AdapterInmueble(requireContext(), inmueblesContratoes, getLayoutInflater(), InmueblesFragment.this);
+
+                RecyclerView recv = bindingI.rvInmuebles;
                 recv.setLayoutManager(gl);
                 recv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
         });
         vmInmuebles.mostrarInmuebles();
+    }
+    @Override
+    public void onInmuebleClick(InmueblesContratos inmueble) {
+        // Aquí manejo la navegación a la vista de detalles del contrato
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("inmueble", inmueble.getInmueble());
+        Navigation.findNavController(requireView()).navigate(R.id.detalleInmuebleFragment, bundle);
     }
 }

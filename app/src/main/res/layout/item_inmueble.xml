@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_inmueble"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="260dp">
 
     <ImageView
         android:id="@+id/ivInmueble"
@@ -19,13 +19,13 @@
 
     <TextView
         android:id="@+id/tvTipo"
-        android:layout_width="175dp"
-        android:layout_height="30dp"
+        android:layout_width="185dp"
+        android:layout_height="31dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/aclonica"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="#040D47"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

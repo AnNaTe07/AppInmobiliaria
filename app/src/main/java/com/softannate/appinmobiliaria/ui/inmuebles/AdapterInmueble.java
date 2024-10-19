@@ -1,7 +1,6 @@
 package com.softannate.appinmobiliaria.ui.inmuebles;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +8,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.softannate.appinmobiliaria.R;
 import com.softannate.appinmobiliaria.modelos.Inmueble;
+import com.softannate.appinmobiliaria.modelos.InmueblesContratos;
 
 import java.util.ArrayList;
 
 public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHolderInmueble> {
 
     private Context contexto;
-    private ArrayList<Inmueble> inmuebles;
+    private ArrayList<InmueblesContratos> inmueblesContratoes;
     private LayoutInflater inflater;
+    private OnInmuebleClickListener listener;
 
-    public AdapterInmueble(Context contexto, ArrayList<Inmueble> inmuebles, LayoutInflater inflater) {
+
+    public AdapterInmueble(Context contexto, ArrayList<InmueblesContratos> inmueblesContratoes, LayoutInflater inflater, OnInmuebleClickListener listener) {
         this.contexto = contexto;
-        this.inmuebles = inmuebles;
+        this.inmueblesContratoes = inmueblesContratoes;
         this.inflater = inflater;
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,22 +43,28 @@ public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHo
     //seteo datos a c/inmueble
     @Override
     public void onBindViewHolder(@NonNull ViewHolderInmueble holder, int position) {
+        InmueblesContratos ic = inmueblesContratoes.get(position);
+        Inmueble inmueble = ic.getInmueble();
 
-        Inmueble inmueble = inmuebles.get(position);
-        holder.tvTipo.setText(inmueble.getTipo().getDescripcion());
-        holder.tvDir.setText(inmueble.getDireccion());
-        holder.tvAmb.setText(String.valueOf(inmueble.getAmbientes())+ " ambientes");
-        holder.tvPrecio.setText("$ "+String.valueOf(inmueble.getPrecio()));
+        // Verifico si inmueble y su tipo son nulos
+        if (inmueble != null && inmueble.getTipo() != null) {
+            holder.tvTipo.setText(inmueble.getTipo().getDescripcion());
+        } else {
+            holder.tvTipo.setText("Tipo desconocido");
+        }
+        holder.tvDir.setText(inmueble != null ? inmueble.getDireccion() : "Dirección desconocida");
+        holder.tvAmb.setText(inmueble != null ? inmueble.getAmbientes() + " ambientes" : "0 ambientes");
+        holder.tvPrecio.setText(inmueble != null ? "$ " + inmueble.getPrecio() : "$ 0");
         Glide.with(contexto)
-                .load(inmueble.getFoto())
+                .load(inmueble != null ? inmueble.getFoto() : R.drawable.perfil)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.perfil)
-                .into((ImageView)holder.ivInmueble);
+                .error(R.drawable.casa)
+                .into((ImageView) holder.ivInmueble);
     }
 
     @Override
     public int getItemCount() {
-        return inmuebles.size();
+        return inmueblesContratoes.size();
     }
 
     public class ViewHolderInmueble extends RecyclerView.ViewHolder {
@@ -74,14 +82,15 @@ public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    Inmueble inmueble= inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
-                    Navigation.findNavController(view).navigate(R.id.detalleInmuebleFragment, bundle);
+                    InmueblesContratos ic = inmueblesContratoes.get(getAdapterPosition());
+                    listener.onInmuebleClick(ic);
                 }
             });
-
         }
+    }
+    public interface OnInmuebleClickListener {
+        void onInmuebleClick(InmueblesContratos inmueblesContratos);
+
     }
 }
 

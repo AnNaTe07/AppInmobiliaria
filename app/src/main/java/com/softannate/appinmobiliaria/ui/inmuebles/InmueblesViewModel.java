@@ -9,9 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.softannate.appinmobiliaria.modelos.Inmueble;
+import com.softannate.appinmobiliaria.modelos.InmueblesContratos;
 import com.softannate.appinmobiliaria.request.ApiClient;
 
 import java.util.ArrayList;
@@ -24,14 +23,14 @@ import retrofit2.Response;
 public class InmueblesViewModel extends AndroidViewModel {
 
     private Context contexto;
-    private MutableLiveData<ArrayList<Inmueble>> inmuebles;
+    private MutableLiveData<ArrayList<InmueblesContratos>> inmuebles;
 
     public InmueblesViewModel(@NonNull Application application) {
         super(application);
         this.contexto = application.getApplicationContext();
     }
 
-    public  LiveData<ArrayList<Inmueble>> getMInmuebles(){
+    public  LiveData<ArrayList<InmueblesContratos>> getMInmuebles(){
         if(inmuebles == null){
             inmuebles = new MutableLiveData<>();
         }
@@ -43,14 +42,14 @@ public class InmueblesViewModel extends AndroidViewModel {
         ApiClient.Endpoints api= ApiClient.getApi();
         String token= ApiClient.getToken(contexto);
 
-        Call<List<Inmueble>> llamadaInmuebles= api.inmuebles(token);
-        llamadaInmuebles.enqueue(new Callback<List<Inmueble>>() {
+        Call<List<InmueblesContratos>> llamadaInmuebles= api.inmuebles(token);
+        llamadaInmuebles.enqueue(new Callback<List<InmueblesContratos>>() {
             @Override
-            public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
+            public void onResponse(Call<List<InmueblesContratos>> call, Response<List<InmueblesContratos>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("InmueblesViewModel", "Inmuebles: " + response.body().toString());
-                    inmuebles.postValue((ArrayList<Inmueble>)response.body());
+                    inmuebles.postValue((ArrayList<InmueblesContratos>)response.body());
                     Toast.makeText(contexto, "Éstos son sus inmuebles", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(contexto, "Error al cargar los inmuebles", Toast.LENGTH_SHORT).show();
@@ -58,7 +57,7 @@ public class InmueblesViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Inmueble>> call, Throwable throwable) {
+            public void onFailure(Call<List<InmueblesContratos>> call, Throwable throwable) {
                 Toast.makeText(contexto, "Error al cargar los inmuebles", Toast.LENGTH_SHORT).show();
             }
         });

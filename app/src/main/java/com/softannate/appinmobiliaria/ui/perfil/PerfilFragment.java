@@ -63,11 +63,11 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onChanged(Propietario propietario) {
                 if (propietario != null) {
-                    etDni.setText(propietario.getDni());
-                    etApellido.setText(propietario.getApellido());
-                    etEmail2.setText(propietario.getEmail());
-                    etNombre.setText(propietario.getNombre());
-                    etTelefono.setText(propietario.getTelefono());
+                    etDni.setText(String.valueOf(propietario.getDni()));
+                    etApellido.setText(String.valueOf(propietario.getApellido()));
+                    etEmail2.setText(String.valueOf(propietario.getEmail()));
+                    etNombre.setText(String.valueOf(propietario.getNombre()));
+                    etTelefono.setText(String.valueOf(propietario.getTelefono()));
                     Glide.with(getContext())
                             .load(propietario.getAvatar())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)

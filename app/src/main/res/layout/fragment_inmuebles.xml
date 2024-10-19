@@ -16,18 +16,18 @@
         android:layout_gravity="bottom|end"
         android:backgroundTint="#040D47"
         app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/rv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv"
+        app:layout_constraintTop_toTopOf="@+id/rvInmuebles"
         app:layout_constraintVertical_bias="0.975"
         app:maxImageSize="55dp"
         app:srcCompat="@drawable/plus_80"
         app:tint="@android:color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+        android:id="@+id/rvInmuebles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
