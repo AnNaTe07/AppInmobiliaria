@@ -69,7 +69,7 @@ public class InquilinosFragment extends Fragment implements AdapterInmueble.OnIn
     }
     @Override
     public void onInmuebleClick(InmueblesContratos ic) {
-        // Aquí manejo la navegación a la vista de detalles del inquilino y envío el id del inquilino
+        //manejo la navegación a la vista de detalles del inquilino y envío el id del inquilino
         Bundle bundleIn = new Bundle();
         bundleIn.putInt("inquilinoId", ic.getContrato().getInqui().getId());
         Navigation.findNavController(requireView()).navigate(R.id.detalleInquilinoFragment, bundleIn);

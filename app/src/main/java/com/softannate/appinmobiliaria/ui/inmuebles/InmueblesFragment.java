@@ -71,9 +71,9 @@ public class InmueblesFragment extends Fragment implements AdapterInmueble.OnInm
         vmInmuebles.getMInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<InmueblesContratos>>() {
 
             @Override
-            public void onChanged(ArrayList<InmueblesContratos> inmueblesContratoes) {
+            public void onChanged(ArrayList<InmueblesContratos> inmueblesContratos) {
                 GridLayoutManager gl = new GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false);
-                adapter = new AdapterInmueble(requireContext(), inmueblesContratoes, getLayoutInflater(), InmueblesFragment.this);
+                adapter = new AdapterInmueble(requireContext(), inmueblesContratos, getLayoutInflater(), InmueblesFragment.this);
 
                 RecyclerView recv = bindingI.rvInmuebles;
                 recv.setLayoutManager(gl);
@@ -85,7 +85,7 @@ public class InmueblesFragment extends Fragment implements AdapterInmueble.OnInm
     }
     @Override
     public void onInmuebleClick(InmueblesContratos inmueble) {
-        // Aquí manejo la navegación a la vista de detalles del contrato
+        //manejo la navegación a la vista de detalles del contrato
         Bundle bundle = new Bundle();
         bundle.putSerializable("inmueble", inmueble.getInmueble());
         Navigation.findNavController(requireView()).navigate(R.id.detalleInmuebleFragment, bundle);

@@ -22,7 +22,9 @@ public class RestablecerPassActivity extends AppCompatActivity {
 
     private String etPassR1; // Variable para almacenar el nuevo pass.
     private String etPassR2; // Variable para almacenar la confirmación del nuevo pass.
-    private ActivityRestablecerPassBinding binding;
+   // private Button btGuardarPass; // Botón para guardar el nuevo pass.
+
+    private ActivityRestablecerPassBinding binding; // Binding para acceder a los elementos de la vista.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class RestablecerPassActivity extends AppCompatActivity {
 
         Uri uri = getIntent().getData(); // Obtengo la URI que fue pasada a la actividad.
         binding.restablecerPass.setVisibility(View.VISIBLE); // Hago visible la vista para restablecer la contraseña.
-        //Log.d("RestablecerPassActivity", "URI received: " + uri.toString());
+        Log.d("RestablecerPassActivity", "URI received: " + uri.toString()); // Registro en log la URI recibida.
 
         // Obtengo el token y el email de la URI.
         String token = uri.getQueryParameter("token");
@@ -53,10 +55,13 @@ public class RestablecerPassActivity extends AppCompatActivity {
         vm.setEmail(email);
         vm.setToken(token);
 
+
         vm.getRedirigirAlLogin().observe(this, redirigir -> {
             // Si es true, redirige al login
             redirigirAlLogin();
         });
+
+
 
 
         // listener para el botón de guardar contraseña.
@@ -69,13 +74,14 @@ public class RestablecerPassActivity extends AppCompatActivity {
             }
         });
     }
-
     private void redirigirAlLogin() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//se eliminan las activity, sólo la nueva permanece, asi el usuario no puede volver atrás
         startActivity(intent);
         finish();
     }
+
+
 
     @Override
     protected void onNewIntent(Intent intent) {

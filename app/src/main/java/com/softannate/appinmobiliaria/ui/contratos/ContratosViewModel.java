@@ -50,14 +50,14 @@ public void mostrarAlquilados(){
                 inmuebleContrato.postValue((ArrayList<InmueblesContratos>)response.body());
             Toast.makeText(contexto, "Inmuebles alquilados", Toast.LENGTH_SHORT).show();
             } else {
-                Log.e("ContratosViewModel", "Error: " + response.code() + " - " + response.message());
+               // Log.e("ContratosViewModel", "Error: " + response.code() + " - " + response.message());
                 Toast.makeText(contexto, "Error al cargar los inmuebles", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<List<InmueblesContratos>> call, Throwable throwable) {
-            Log.e("ContratosViewModel", "Error en la llamada a la API: " + throwable.getMessage());
+         //   Log.e("ContratosViewModel", "Error en la llamada a la API: " + throwable.getMessage());
             Toast.makeText(contexto, "Error al cargar los inmuebles", Toast.LENGTH_SHORT).show();
         }
     });

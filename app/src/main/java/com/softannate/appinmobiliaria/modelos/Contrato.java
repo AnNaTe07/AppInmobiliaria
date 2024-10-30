@@ -1,9 +1,5 @@
 package com.softannate.appinmobiliaria.modelos;
 
-import java.time.LocalDateTime;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Contrato {
 
     private int id;
@@ -11,16 +7,21 @@ public class Contrato {
     private String hasta;
     private Inmueble inmu;
     private Inquilino inqui;
+    private String inquilino;
+    private String inmueble;
     private double monto;
 
-    public Contrato(int id, String  desde, String  hasta, Inmueble inmu, Inquilino inqui, double monto) {
+    public Contrato(int id, String desde, String hasta, Inmueble inmu, Inquilino inqui, String inquilino, String inmueble, double monto) {
         this.id = id;
         this.desde = desde;
         this.hasta = hasta;
         this.inmu = inmu;
         this.inqui = inqui;
+        this.inquilino = inquilino;
+        this.inmueble = inmueble;
         this.monto = monto;
     }
+
 
     public int getId() {
         return id;
@@ -68,5 +69,21 @@ public class Contrato {
 
     public void setMonto(double monto) {
         this.monto = monto;
+    }
+
+    public String getInquilino() {
+        return inquilino;
+    }
+
+    public void setInquilino(String inquilino) {
+        this.inquilino = inquilino;
+    }
+
+    public String getInmueble() {
+        return inmueble;
+    }
+
+    public void setInmueble(String inmueble) {
+        this.inmueble = inmueble;
     }
 }

@@ -97,9 +97,9 @@ public class PerfilViewModel extends AndroidViewModel {
                 if (response.body() != null) {
                     mPropietario.setValue(response.body());
                     avatar.setValue(response.body().toString());
-                   // Log.d("salida profile", response.body().toString());
+                    Log.d("salida profile", response.body().toString());
                 } else {
-                   // Log.d("salida ", response.message());
+                    Log.d("salida ", response.message());
                 }
             }
 
@@ -114,10 +114,10 @@ public class PerfilViewModel extends AndroidViewModel {
         ApiClient.Endpoints api = ApiClient.getApi();
         String token = ApiClient.getToken(contexto);
 
-        // Cargo el email actual del propietario
+        // Cargar el email actual del objeto que ya tienes
         email = p.getEmail();
-       ;
-        // Creo un nuevo propietario sin el email
+        Log.d("Email Actual2", "Email: " + email);
+        // Crear un nuevo objeto sin el email
         Propietario actualizado = new Propietario();
         actualizado.setEmail(email);
         actualizado.setNombre(p.getNombre());

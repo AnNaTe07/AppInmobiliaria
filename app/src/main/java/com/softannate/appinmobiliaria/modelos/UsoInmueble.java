@@ -1,26 +1,34 @@
 package com.softannate.appinmobiliaria.modelos;
 
-public enum UsoInmueble {
-    COMERCIAL(1),
-    RESIDENCIAL(2);
+import androidx.annotation.NonNull;
 
-    private final int value;
+import java.io.Serializable;
 
-    UsoInmueble(int value) {
-        this.value = value;
+public class UsoInmueble implements Serializable {
+
+    private int id;
+    private String nombre;
+
+    public int getId() {
+        return id;
     }
 
-    public int getValue() {
-        return value;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static UsoInmueble fromValue(int value) {
-        for (UsoInmueble uso : UsoInmueble.values()) {
-            if (uso.getValue() == value) {
-                return uso;
-            }
-        }
-        throw new IllegalArgumentException("Valor desconocido: " + value);
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nombre;
     }
 }
 

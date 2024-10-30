@@ -2,20 +2,17 @@ package com.softannate.appinmobiliaria.ui.contratos;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.softannate.appinmobiliaria.R;
 import com.softannate.appinmobiliaria.databinding.FragmentContratosBinding;
 import com.softannate.appinmobiliaria.modelos.InmueblesContratos;
@@ -72,9 +69,10 @@ public class ContratosFragment extends Fragment implements AdapterInmueble.OnInm
 
     @Override
     public void onInmuebleClick(InmueblesContratos ic) {
-        // Maneja la navegación a la vista de detalles del contrato y envía el ID de contrato
+        //navegación a la vista de detalles del contrato y envía el ID de inmueble
         Bundle bundleC = new Bundle();
-        bundleC.putSerializable("contrato", ic.getContrato().getId());
+        bundleC.putInt("inmuebleId", ic.getInmueble().getId());
+        Log.d("inmueble", "ID del inmueble: " + ic.getInmueble().getId());
         Navigation.findNavController(requireView()).navigate(R.id.detalleContratoFragment, bundleC);
     }
 }

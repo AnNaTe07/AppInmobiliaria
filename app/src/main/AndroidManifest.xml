@@ -2,16 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- para la ubicación en el mapa-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- para usar internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- para hacer la llamada -->
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <!-- para usar el acelerómetro -->
     <uses-permission android:name="android.permission.ACCELEROMETER"
         tools:ignore="CoarseFineLocation" />
+
+    <!-- para fotos de galería-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- para tomar fotos con la cámara -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -23,11 +42,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppInmobiliaria"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
+
+
         <activity
             android:name=".RestablecerPassActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppInmobiliaria.NoActionBar"/>
+            android:exported="true"
+            android:theme="@style/Theme.AppInmobiliaria.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http"
+                    android:host="192.168.1.2"
+                    android:port="5000"
+                    android:pathPrefix="/api/propietario/restablecePass" />
+            </intent-filter>
+        </activity>
+
+
+
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

@@ -40,13 +40,14 @@
         android:id="@+id/btFotoPerfil"
         android:layout_width="47dp"
         android:layout_height="47dp"
+        android:layout_marginTop="112dp"
         android:backgroundTint="#040D47"
         app:icon="@drawable/camara"
         app:iconSize="30dp"
         app:iconTint="#FFFCFC"
-        app:layout_constraintBottom_toTopOf="@+id/etNombre"
+        app:layout_constraintBottom_toTopOf="@+id/etFin"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.424" />
@@ -56,18 +57,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="76dp"
         android:fontFamily="@font/aclonica"
         android:text="DNI"
         android:textColor="#040D47"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagenPerfil" />
 
     <EditText
-        android:id="@+id/etDni"
+        android:id="@+id/etDniP"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
@@ -100,10 +101,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDni" />
+        app:layout_constraintTop_toBottomOf="@+id/etDniP" />
 
     <EditText
-        android:id="@+id/etNombre"
+        android:id="@+id/etNombreP"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
@@ -135,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombreP" />
 
     <EditText
         android:id="@+id/etApellido"
@@ -193,42 +194,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/aclonica"
-        android:text="Email"
-        android:textColor="#040D47"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTel" />
-
-
-    <EditText
-        android:id="@+id/etEmail2"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#040D47"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:inputType="textEmailAddress"
-        android:textAlignment="center"
-        android:textColor="#040D47"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btPass"
@@ -251,16 +216,16 @@
         android:id="@+id/btPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:backgroundTint="#040D47"
         android:fontFamily="@font/aclonica"
         android:text="Editar"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail2" />
+        app:layout_constraintTop_toBottomOf="@+id/etTel" />
 
     <ImageView
         android:id="@+id/imagenPerfil"

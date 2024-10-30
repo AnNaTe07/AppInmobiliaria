@@ -94,7 +94,7 @@ public class ApiClient {
         Call<ResponseBody> enviarEmail(@Body OlvidaPass dto);
 
         @POST("propietario/restablecePass")
-        Call<ResponseBody> restablecerPass(@Body RestablecePass dto,@Header("Authorization") String token );
+        Call<ResponseBody> restablecerPass(@Body RestablecePass dto );
 
         //Inmueble
         @GET("inmueble")

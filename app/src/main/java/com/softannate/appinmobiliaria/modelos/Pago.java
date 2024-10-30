@@ -6,16 +6,16 @@ public class Pago {
 
     private int id;
     private int nro;
-    private Date fecha;
+    private String fecha;
     private double monto;
-    private Contrato contrato;
+    private String direccion ;
 
-    public Pago(int id, int nro, Date fecha, double monto, Contrato contrato) {
+    public Pago(int id, int nro, String fecha, double monto, String direccion) {
         this.id = id;
         this.nro = nro;
         this.fecha = fecha;
         this.monto = monto;
-        this.contrato = contrato;
+        this.direccion = direccion;
     }
 
     public int getId() {
@@ -34,14 +34,13 @@ public class Pago {
         this.nro = nro;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
     public double getMonto() {
         return monto;
     }
@@ -50,11 +49,11 @@ public class Pago {
         this.monto = monto;
     }
 
-    public Contrato getContrato() {
-        return contrato;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

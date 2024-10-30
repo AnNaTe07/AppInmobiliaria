@@ -1,11 +1,14 @@
 package com.softannate.appinmobiliaria;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,8 +16,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainActivityViewModel vm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
+
         // Obtengo el token
         SharedPreferences sp = getSharedPreferences("token.xml", Context.MODE_PRIVATE);
         String token = sp.getString("token", null);
         Log.d("token profile", token);
-
-        vm.leerPropietario(); // Llamo al método para obtener el propietario
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
@@ -62,16 +67,22 @@ public class MainActivity extends AppCompatActivity {
         vm.getPropietario().observe(this, new Observer<Propietario>() {
             @Override
             public void onChanged(Propietario propietario) {
-                vm.leerPropietario();
                 hNombre.setText(propietario.getNombre()+" "+ propietario.getApellido());
                 hEmail.setText(propietario.getEmail());
                 Log.d("Avatar URL", "URL: " + propietario.getAvatar());
-
-                Glide.with(getApplication().getApplicationContext()).
-                        load(propietario.getAvatar())
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.perfil)
-                        .into(hAvatar);
+                vm.getAvatar().observe(MainActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        Glide.with(getApplication().getApplicationContext()).
+                                load(propietario.getAvatar())
+                                .placeholder(R.drawable.cargando) // Imagen temporal mientras se carga
+                                .diskCacheStrategy(DiskCacheStrategy.NONE) // Desactivo la caché
+                                .skipMemoryCache(true)
+                                .signature(new ObjectKey(System.currentTimeMillis())) // Forzar actualización
+                                .error(R.drawable.perfil_user)
+                                .into(hAvatar);
+                    }
+                });
             }
         });
 
@@ -91,11 +102,32 @@ public class MainActivity extends AppCompatActivity {
 
         // Para sacar el color que trae por defecto cada item del menú
         navigationView.setItemIconTintList(null);
+
+        // Listener para cuando se abre el menú
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                vm.leerPropietario(); // Llama a leerPropietario cuando el menú se abre
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {}
+
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {}
+
+            @Override
+            public void onDrawerStateChanged(int newState) {}
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        vm.leerPropietario();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -105,4 +137,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
+
 }

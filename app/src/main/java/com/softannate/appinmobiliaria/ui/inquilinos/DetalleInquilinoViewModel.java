@@ -34,7 +34,7 @@ public class DetalleInquilinoViewModel extends AndroidViewModel {
         return mInquilino;
     }
 
-    public void leerInquilino(int id) {
+    public void leerInquilino(int id){
         ApiClient.Endpoints api = ApiClient.getApi();
         String token = ApiClient.getToken(contexto);
 

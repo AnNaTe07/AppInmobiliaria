@@ -2,10 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/detalleInquilino"
+    android:id="@+id/rvContrato"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.inquilinos.DetalleInquilinoFragment">
+    tools:context=".ui.contratos.DetalleContratoFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btPagos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="#040D47"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvContrato"
+        app:layout_constraintVertical_bias="0.975"
+        app:maxImageSize="40dp"
+        app:srcCompat="@drawable/ver_pagos"
+        app:tint="@android:color/white" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="152dp"
@@ -38,24 +56,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="84dp"
         android:fontFamily="@font/aclonica"
-        android:text="DNI"
+        android:text="Fecha de Inicio"
         android:textAlignment="center"
         android:textColor="#040D47"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/etDni"
+    <EditText
+        android:id="@+id/etInicio"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#040D47"
         android:textAlignment="center"
         android:textColor="#040D47"
@@ -73,22 +91,22 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/aclonica"
-        android:text="Nombre y Apellido"
+        android:text="Fecha de Fin"
         android:textAlignment="center"
         android:textColor="#040D47"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDni" />
+        app:layout_constraintTop_toBottomOf="@+id/etInicio" />
 
-    <TextView
-        android:id="@+id/etNombre"
+    <EditText
+        android:id="@+id/etFin"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#040D47"
         android:textAlignment="center"
         android:textColor="#040D47"
@@ -99,30 +117,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Precio"
+        android:textAlignment="center"
+        android:textColor="#040D47"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFin" />
+
+    <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="#040D47"
+        android:textAlignment="center"
+        android:textColor="#040D47"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/aclonica"
-        android:text="Email"
+        android:text="Inquilino"
         android:textAlignment="center"
         android:textColor="#040D47"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/etPrecio" />
 
-    <TextView
-        android:id="@+id/etEmail3"
+    <EditText
+        android:id="@+id/etInquilino"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#040D47"
         android:textAlignment="center"
         android:textColor="#040D47"
@@ -140,22 +190,22 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/aclonica"
-        android:text="Teléfono"
+        android:text="Inmueble"
         android:textAlignment="center"
         android:textColor="#040D47"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail3" />
+        app:layout_constraintTop_toBottomOf="@+id/etInquilino" />
 
-    <TextView
-        android:id="@+id/etTel3"
+    <EditText
+        android:id="@+id/etInmueble"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#040D47"
         android:textAlignment="center"
         android:textColor="#040D47"

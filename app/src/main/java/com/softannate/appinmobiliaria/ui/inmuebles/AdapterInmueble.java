@@ -21,14 +21,14 @@ import java.util.ArrayList;
 public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHolderInmueble> {
 
     private Context contexto;
-    private ArrayList<InmueblesContratos> inmueblesContratoes;
+    private ArrayList<InmueblesContratos> inmueblesContratos;
     private LayoutInflater inflater;
     private OnInmuebleClickListener listener;
 
 
-    public AdapterInmueble(Context contexto, ArrayList<InmueblesContratos> inmueblesContratoes, LayoutInflater inflater, OnInmuebleClickListener listener) {
+    public AdapterInmueble(Context contexto, ArrayList<InmueblesContratos> inmueblesContratos, LayoutInflater inflater, OnInmuebleClickListener listener) {
         this.contexto = contexto;
-        this.inmueblesContratoes = inmueblesContratoes;
+        this.inmueblesContratos = inmueblesContratos;
         this.inflater = inflater;
         this.listener = listener;
     }
@@ -43,28 +43,25 @@ public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHo
     //seteo datos a c/inmueble
     @Override
     public void onBindViewHolder(@NonNull ViewHolderInmueble holder, int position) {
-        InmueblesContratos ic = inmueblesContratoes.get(position);
+        InmueblesContratos ic = inmueblesContratos.get(position);
         Inmueble inmueble = ic.getInmueble();
 
-        // Verifico si inmueble y su tipo son nulos
-        if (inmueble != null && inmueble.getTipo() != null) {
-            holder.tvTipo.setText(inmueble.getTipo().getDescripcion());
-        } else {
-            holder.tvTipo.setText("Tipo desconocido");
-        }
-        holder.tvDir.setText(inmueble != null ? inmueble.getDireccion() : "Dirección desconocida");
-        holder.tvAmb.setText(inmueble != null ? inmueble.getAmbientes() + " ambientes" : "0 ambientes");
-        holder.tvPrecio.setText(inmueble != null ? "$ " + inmueble.getPrecio() : "$ 0");
+        holder.tvTipo.setText(String.valueOf(inmueble.getTipo().getDescripcion()));
+        holder.tvDir.setText(String.valueOf(inmueble.getDireccion()));
+        holder.tvAmb.setText(String.valueOf(inmueble.getAmbientes() + " ambientes"));
+        holder.tvPrecio.setText(String.valueOf("$ " + inmueble.getPrecio()));
         Glide.with(contexto)
-                .load(inmueble != null ? inmueble.getFoto() : R.drawable.perfil)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .load(inmueble.getFoto())
+                .placeholder(R.drawable.cargando) // Imagen temporal mientras se carga
+                .diskCacheStrategy(DiskCacheStrategy.NONE) // Desactivo la caché
+                .skipMemoryCache(true)
                 .error(R.drawable.casa)
                 .into((ImageView) holder.ivInmueble);
     }
 
     @Override
     public int getItemCount() {
-        return inmueblesContratoes.size();
+        return inmueblesContratos.size();
     }
 
     public class ViewHolderInmueble extends RecyclerView.ViewHolder {
@@ -82,7 +79,7 @@ public class AdapterInmueble extends RecyclerView.Adapter<AdapterInmueble.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    InmueblesContratos ic = inmueblesContratoes.get(getAdapterPosition());
+                    InmueblesContratos ic = inmueblesContratos.get(getAdapterPosition());
                     listener.onInmuebleClick(ic);
                 }
             });

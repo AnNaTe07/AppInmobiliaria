@@ -48,7 +48,7 @@ public class InquilinosViewModel extends AndroidViewModel {
 
                 if(response.isSuccessful() && response.body() != null) {
                     inmuebleContrato.postValue((ArrayList<InmueblesContratos>)response.body());
-                   // Toast.makeText(contexto, "Inmuebles alquilados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(contexto, "Inmuebles alquilados", Toast.LENGTH_SHORT).show();
                 } else {
                     // Log.e("ContratosViewModel", "Error: " + response.code() + " - " + response.message());
                     Toast.makeText(contexto, "Error al cargar los inmuebles", Toast.LENGTH_SHORT).show();

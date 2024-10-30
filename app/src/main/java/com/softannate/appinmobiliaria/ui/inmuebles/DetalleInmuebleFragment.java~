@@ -89,10 +89,8 @@ public class DetalleInmuebleFragment extends Fragment {
                 disponible.setChecked(inmueble.isEstado());
                 Glide.with(getContext())
                         .load(inmueble.getFoto())
-                        .placeholder(R.drawable.cargando) // Imagen temporal mientras se carga
-                        .diskCacheStrategy(DiskCacheStrategy.NONE) // Desactivo la caché
-                        .skipMemoryCache(true)
-                        .error(R.drawable.casa)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .error(R.drawable.perfil)
                         .into(fotoInmueble);
 
                 disponible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

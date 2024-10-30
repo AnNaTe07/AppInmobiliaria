@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.softannate.appinmobiliaria.R;
+import com.softannate.appinmobiliaria.modelos.Contrato;
 import com.softannate.appinmobiliaria.modelos.Inmueble;
 import com.softannate.appinmobiliaria.modelos.Pago;
+import com.softannate.appinmobiliaria.request.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +40,13 @@ public class AdapterPago extends RecyclerView.Adapter<AdapterPago.ViewHolderPago
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPago holder, int position) {
 
-        Pago pago= pagos.get(position);
+        Pago pago = pagos.get(position);
         holder.tvNro.setText(String.valueOf(pago.getNro()));
-        holder.tvFecha.setText(pago.getFecha().toString());
-        holder.tvImporte.setText("$ "+String.valueOf(pago.getMonto()));
-        holder.tvDomicilio.setText(pago.getContrato().getInmu().getDireccion());
+        holder.tvFecha.setText(Utils.formatearFecha(String.valueOf(pago.getFecha())));
+        holder.tvImporte.setText("$ " + String.valueOf(pago.getMonto()));
+        holder.tvDomicilio.setText(String.valueOf(pago.getDireccion()));
         holder.tvCodigo.setText(String.valueOf(pago.getId()));
-    }
+}
 
     @Override
     public int getItemCount() {
@@ -57,11 +59,11 @@ public class AdapterPago extends RecyclerView.Adapter<AdapterPago.ViewHolderPago
 
         public ViewHolderPago(@NonNull View itemView) {
             super(itemView);
+            tvCodigo = itemView.findViewById(R.id.tvCodigo);
             tvNro = itemView.findViewById(R.id.tvNro);
             tvFecha = itemView.findViewById(R.id.tvFecha);
             tvImporte = itemView.findViewById(R.id.tvImporte);
             tvDomicilio = itemView.findViewById(R.id.tvDomicilio);
-            tvCodigo = itemView.findViewById(R.id.tvCodigo);
         }
     }
 }

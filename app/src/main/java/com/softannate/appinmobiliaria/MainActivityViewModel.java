@@ -23,14 +23,15 @@ import retrofit2.Response;
 public class MainActivityViewModel extends AndroidViewModel {
 
 
-
-    private MutableLiveData<Propietario> propietario= new MutableLiveData<>();
-    private MutableLiveData<String> error; // Para manejar errores
+    private MutableLiveData<Propietario> propietario;
+    private MutableLiveData<String> avatar;
     private Context contexto;
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
         this.contexto = application;
+        propietario = new MutableLiveData<>();
+        avatar = new MutableLiveData<>();
     }
 
     public LiveData<Propietario> getPropietario() {
@@ -40,46 +41,38 @@ public class MainActivityViewModel extends AndroidViewModel {
         return propietario;
     }
 
-    public LiveData<String> getError() {
-        if(error==null){
-            error=new MutableLiveData<>();
+    public LiveData<String> getAvatar() {
+        if(avatar==null){
+            avatar=new MutableLiveData<>();
         }
-        return error;
+        return avatar;
     }
 
     public void leerPropietario() {
         ApiClient.Endpoints api = ApiClient.getApi();
         String token = ApiClient.getToken(contexto);
-        if (token == null || token.isEmpty()) {
-            Log.e("MainActivity", "Token no disponible");
-            return;
-        }
 
-        Call<Propietario> llamadaAPerfil = api.profile( token);
-
+        Call<Propietario> llamadaAPerfil = api.profile(token);
         llamadaAPerfil.enqueue(new Callback<Propietario>() {
+
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
-                Log.d("salida profile", response.raw() + "");
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        propietario.setValue(response.body());
-                        Log.d("salida profile", response.body().toString());
-                    } else {
-                        error.setValue("No existen datos de propietario");
-                        Log.d("salida profile", response.message());
-                    }
+               // Log.d("salida profile perfil", response.raw() + "");
+
+                if (response.body() != null) {
+                    propietario.setValue(response.body());
+                    avatar.setValue(response.body().toString());
+                    //Log.d("salida profile", response.body().toString());
                 } else {
-                    error.setValue("Error al obtener datos de propietario. Código: " + response.code());
-                    Log.d("Error", "Código de respuesta: " + response.code());
+                   // Log.d("salida ", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Propietario> call, Throwable t) {
-                error.setValue("Error al mostrar los Datos: " + t.getMessage());
-                Log.d("fallo", t.getMessage());
+                Toast.makeText(contexto, "Error al mostrar los Datos", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }
